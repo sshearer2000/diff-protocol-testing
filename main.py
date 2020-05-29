@@ -27,6 +27,13 @@ from gensim.corpora.dictionary import Dictionary
 from wordcloud import WordCloud
 !python -m spacy download en_core_web_md #must restart runtime after running this line
 
+"""# Import csv files as dataframes
+To be able to import csv files, make sure to upload files first via the tabs on the left
+"""
+
+stud = pd.read_csv('Difficulty Protocol Data - Student Protocol.csv',encoding="utf-8",index_col=0)
+profta = pd.read_csv('Difficulty Protocol Data - Faculty_TA Protocol.csv',encoding="utf-8",index_col=0)
+
 """# Tokenize function"""
 
 #sentence tokenizer for bag of words and n-grams, returns tokenized sentences 

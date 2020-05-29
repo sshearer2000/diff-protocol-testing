@@ -8,7 +8,6 @@ Original file is located at
 
 # Import statements
 """
-
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -26,13 +25,15 @@ from gensim.models.tfidfmodel import TfidfModel
 from gensim.corpora.dictionary import Dictionary
 from wordcloud import WordCloud
 !python -m spacy download en_core_web_md #must restart runtime after running this line
+"""
+
 
 """# Import csv files as dataframes
 To be able to import csv files, make sure to upload files first via the tabs on the left
 """
-
 stud = pd.read_csv('Difficulty Protocol Data - Student Protocol.csv',encoding="utf-8",index_col=0)
 profta = pd.read_csv('Difficulty Protocol Data - Faculty_TA Protocol.csv',encoding="utf-8",index_col=0)
+
 
 """# Stop Word Categories
 
@@ -40,8 +41,8 @@ profta = pd.read_csv('Difficulty Protocol Data - Faculty_TA Protocol.csv',encodi
 2.   Getting rid of typical classroom activities (i.e. talked, presented, covering)
 3. Getting rid of words that don’t give any insight (i.e. barely, spent, able, end, began)
 
-"""# Create student bags of words"""
 
+"""# Create student bags of words"""
 #Topics Covered
 stud_topics_tkn = tokenize(stud,'topics_covered')
 stud_topics_bag = bag_of_words(stud_topics_tkn)
@@ -83,8 +84,8 @@ for ngram in ngram_list:
     stud_surprise_ngrams.append(ngram)
 print("Student Surprise Questions:",stud_surprise_ngrams,'\n')
 
-"""# Create Prof./TA Bag of Words"""
 
+"""# Create Prof./TA Bag of Words"""
 #Topics Covered
 profta_topics_tkn = tokenize(profta,'topics_covered')
 profta_topics_bag = bag_of_words(profta_topics_tkn)
@@ -125,8 +126,8 @@ for ngram in ngram_list:
     profta_surprise_ngrams.append(ngram)
 print("Professor/TA Surprise Questions:",profta_surprise_ngrams,'\n')
 
-"""# Prints the Top 10 for Prof/TA & Students"""
 
+"""# Prints the Top 10 for Prof/TA & Students"""
 #Topics Covered
 print("Professor/TA Topics:")
 top_profta_topics = top10Idf(profta_topics_bag)
@@ -151,8 +152,8 @@ top_profta_surprise = top10Idf(profta_surprise_bag)
 print("Student Surprise Questions:")
 top_stud_surprise = top10Idf(stud_surprise_bag)
 
-"""# Prints the top 10 N-Grams"""
 
+"""# Prints the top 10 N-Grams"""
 #Topics Covered
 print("Professor/TA Topics:")
 top_profta_topics2 = top10Idf(profta_topics_ngrams)
@@ -177,31 +178,8 @@ top_profta_surprise2 = top10Idf(profta_surprise_ngrams)
 print("Student Surprise Questions:")
 top_stud_surprise2 = top10Idf(stud_surprise_ngrams)
 
-"""# Function to make Word Cloud"""
-
-def wordcloud(dictionary):
-  wc = WordCloud(background_color='black',max_words=2000,width=1024,height=720,colormap="spring")
-  wc.generate_from_frequencies(dict(dictionary))
-  return wc
-
-"""# Function to Plot Word Clouds in a Grid"""
-
-def plotclouds(wc1,wc2,wc3,wc4,save):
-  plt.subplot(2,2,1).imshow(wc1,interpolation='bilinear')
-  plt.title("Tfidf")
-  plt.axis("off")
-  plt.subplot(2,2,2).imshow(wc2,interpolation='bilinear')
-  plt.title("NGrams Tfidf")
-  plt.axis("off")
-  plt.subplot(2,2,3).imshow(wc3,interpolation='bilinear')
-  plt.axis("off")
-  plt.subplot(2,2,4).imshow(wc4,interpolation='bilinear')
-  plt.axis("off")
-  plt.savefig(save)
-  plt.clf()
 
 """# Plotting Word Clouds"""
-
 #Topics Covered
 wc1 = wordcloud(top_profta_topics)
 wc2 = wordcloud(top_profta_topics2)
@@ -229,6 +207,7 @@ wc2 = wordcloud(top_profta_surprise2)
 wc3 = wordcloud(top_stud_surprise)
 wc4 = wordcloud(top_stud_surprise2)
 plotclouds(wc1,wc2,wc3,wc4,'cloud_surprise')
+
 
 """# Sentence TFIDF"""
 

@@ -125,35 +125,6 @@ for ngram in ngram_list:
     profta_surprise_ngrams.append(ngram)
 print("Professor/TA Surprise Questions:",profta_surprise_ngrams,'\n')
 
-"""# Fitting TFIDF Model"""
-
-def tfidfModelling(bag):
-  dictionary = Dictionary(bag)
-  corpus = [dictionary.doc2bow(doc) for doc in bag]
-  return(TfidfModel(corpus),corpus,dictionary)
-
-"""#Top 10 tf-idf words"""
-
-def top10Idf (bag):
-  model, corpus,dictionary = tfidfModelling(bag)
-  weights = []
-  for doc in corpus:
-    for combo in model[doc]:
-      weights.append(combo)
-  #sorted weighted list
-  weights = sorted(weights, key=lambda w : w[1], reverse=True)
-  new_weights = []
-  #make list unique
-  for word in weights:
-    if word not in new_weights:
-      new_weights.append(word)
-  #print top 10 words based on tfidf
-  for term_id, weight in new_weights[0:10]:
-    print(dictionary.get(term_id), weight)
-  print("\n") 
-  #return top 10 words based on tfidf
-  return [(dictionary[pair[0]],pair[1]) for pair in new_weights[0:10]]
-
 """# Prints the Top 10 for Prof/TA & Students"""
 
 #Topics Covered

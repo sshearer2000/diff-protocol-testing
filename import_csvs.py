@@ -3,13 +3,6 @@
 def rename_col(csv, og_name, new_name):
     csv.rename(columns={og_name:new_name},inplace=True)
 
-"""# Import csv files as dataframes
-To be able to import csv files, make sure to upload files first via the tabs on the left
-"""
-
-stud = pd.read_csv('Difficulty Protocol Data - Student Protocol.csv',encoding="utf-8",index_col=0)
-profta = pd.read_csv('Difficulty Protocol Data - Faculty_TA Protocol.csv',encoding="utf-8",index_col=0)
-
 """# Rename columns"""
 
 rename_col(stud,'Timestamp','time')

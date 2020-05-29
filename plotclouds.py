@@ -1,0 +1,13 @@
+def plotclouds(wc1,wc2,wc3,wc4,save):
+  plt.subplot(2,2,1).imshow(wc1,interpolation='bilinear')
+  plt.title("Tfidf")
+  plt.axis("off")
+  plt.subplot(2,2,2).imshow(wc2,interpolation='bilinear')
+  plt.title("NGrams Tfidf")
+  plt.axis("off")
+  plt.subplot(2,2,3).imshow(wc3,interpolation='bilinear')
+  plt.axis("off")
+  plt.subplot(2,2,4).imshow(wc4,interpolation='bilinear')
+  plt.axis("off")
+  plt.savefig(save)
+  plt.clf()
